@@ -204,6 +204,8 @@ nvidia-nvjitlink-cu12==12.6.20
     # via nvidia-cusparse-cu12
 nvidia-nvtx-cu12==12.1.105
     # via torch
+orjson==3.10.6
+    # via bert-score-api
 packaging==24.0
     # via bert-score
     # via huggingface-hub
@@ -357,7 +359,6 @@ typing-extensions==4.11.0
     # via typer
 tzdata==2024.1
     # via pandas
-ujson==5.10.0
 urllib3==2.2.1
     # via requests
 uvicorn==0.30.5

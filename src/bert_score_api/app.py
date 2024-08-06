@@ -2,7 +2,7 @@ from importlib import metadata
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import UJSONResponse
+from fastapi.responses import ORJSONResponse
 
 from bert_score_api.routers import score_calculation
 
@@ -14,7 +14,7 @@ def create_app() -> FastAPI:
         docs_url="/api/docs",
         redoc_url="/api/redoc",
         openapi_url="/api/openapi.json",
-        default_response_class=UJSONResponse,
+        default_response_class=ORJSONResponse,
     )
 
     app.include_router(score_calculation.router)

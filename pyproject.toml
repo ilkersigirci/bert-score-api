@@ -37,6 +37,7 @@ classifiers = [
 dependencies = [
     "bert-score>=0.3.13",
     "fastapi[standard]>=0.112.0",
+    "orjson>=3.10.6",
 ]
 
 [tool.rye]
@@ -61,7 +62,6 @@ dev-dependencies = [
     ## Jupyter
     "ipykernel>=6.29.4",
     "pytest-asyncio>=0.23.8",
-    "ujson>=5.10.0",
 ]
 
 [[tool.rye.sources]]

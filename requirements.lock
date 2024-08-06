@@ -117,6 +117,8 @@ nvidia-nvjitlink-cu12==12.6.20
     # via nvidia-cusparse-cu12
 nvidia-nvtx-cu12==12.1.105
     # via torch
+orjson==3.10.6
+    # via bert-score-api
 packaging==24.1
     # via bert-score
     # via huggingface-hub
