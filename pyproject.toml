@@ -1,21 +1,22 @@
 [project]
-name = "python_template"
+name = "bert_score_api"
 version = "0.0.0"
-description = "Python Template"
+description = "Bert Score API"
 
 # NOTE: Overwrites .python-version
 # requires-python = ">=3.11,<3.13"
 
 authors = [
-    {name = "template", email = "template@github.com"},
+    {name = "Ilker SIGIRCI", email = "sigirci.ilker@gmail.com"},
 ]
 maintainers = [
-    {name = "template", email = "template@github.com"},
+    {name = "Ilker SIGIRCI", email = "sigirci.ilker@gmail.com"},
 ]
 readme = "README.md"
 
 keywords = [
-    "template"
+    "bert",
+    "fastapi",
 ]
 
 classifiers = [
@@ -63,7 +64,7 @@ name = "default"
 url = "https://pypi.org/simple/"
 
 [tool.rye.scripts]
-placeholder = "python_template.scripts.placeholder:placeholder_script"
+placeholder = "bert_score_api.scripts.placeholder:placeholder_script"
 
 [tool.pytest.ini_options]
 minversion = "7.0.0"
@@ -75,7 +76,7 @@ addopts = [
 #    "--strict-markers",
 #    "--doctest-modules",
     # NOTE: cov is not working with pycharm debugger. Enable it later!
-#    "--cov python_template",
+#    "--cov bert_score_api",
 #    "--cov-report=xml",
 #    "--cov-report html",
 ]
@@ -107,7 +108,7 @@ extend-exclude = [
 [tool.ruff.lint.per-file-ignores]
 "__init__.py" = ["E402", "F401"]
 # "path/to/file.py" = ["E402"]
-# 'python_template/__init__.py' = ['F405', 'F403']
+# 'bert_score_api/__init__.py' = ['F405', 'F403']
 
 # [tool.ruff.flake8-quotes]
 # inline-quotes = "single"
@@ -171,7 +172,7 @@ combine-as-imports = true
 # Read more here: https://mypy.readthedocs.io/en/stable/config_file.html#using-a-pyproject-toml-file
 [tool.mypy]
 # python_version = "3.8"
-files = ["src/python_template"]
+files = ["src/bert_score_api"]
 # exclude = ['^tests/']
 strict = true
 show_error_codes = true
@@ -184,7 +185,7 @@ ignore_missing_imports = true
 check_untyped_defs = true
 
 [tool.coverage.run]
-source = ['src/python_template']
+source = ['src/bert_score_api']
 branch = true
 context = '${CONTEXT}'
 
@@ -200,7 +201,7 @@ exclude_lines = [
 
 # [tool.coverage.paths]
 # source = [
-#     'src/python_template/',
+#     'src/bert_score_api/',
 # ]
 
 [tool.hatch.metadata]

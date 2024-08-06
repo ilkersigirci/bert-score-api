@@ -1,5 +1,5 @@
 This site contains the project documentation for the
-`python_template` project.
+`bert_score_api` project.
 
 ## Table Of Contents
 

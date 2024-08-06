@@ -1,5 +1,5 @@
 {
-  "name": "python_template",
+  "name": "bert_score_api",
   "dockerComposeFile": [
     "../docker-compose.yml",
     "docker-compose.yml"

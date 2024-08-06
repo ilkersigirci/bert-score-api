@@ -1,4 +1,4 @@
-# Python Template
+# BERT Score API
 
 ## Project Structure
 
@@ -33,19 +33,19 @@ make -s install
 
 ```bash
 # Development build (800 MB)
-docker build --tag python-template --file docker/Dockerfile --target development .
+docker build --tag bert-score-api --file docker/Dockerfile --target development .
 
 # Production build (145 MB)
-docker build --tag python-template --file docker/Dockerfile --target production .
+docker build --tag bert-score-api --file docker/Dockerfile --target production .
 ```
 
 - To run command inside the container:
 
 ```bash
-docker run -it python-template:latest bash
+docker run -it bert-score-api:latest bash
 
 # Temporary container
-docker run --rm -it python-template:latest bash
+docker run --rm -it bert-score-api:latest bash
 ```
 
 ## IDE Setings

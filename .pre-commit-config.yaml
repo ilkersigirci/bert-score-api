@@ -48,7 +48,7 @@ repos:
   #   rev: v0.991
   #   hooks:
   #     - id: mypy
-  #       files: python_template
+  #       files: bert_score_api
   #       additional_dependencies: [types-PyYAML, rich]
   #       args: [
   #           "--strict",

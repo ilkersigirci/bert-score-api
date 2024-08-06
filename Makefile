@@ -2,17 +2,17 @@
 # chain commands together with semicolon
 .ONESHELL:
 SHELL=/bin/bash
-ROOT_DIR=python-template
-PACKAGE=src/python_template
+ROOT_DIR=bert-score-api
+PACKAGE=src/bert_score_api
 PYTHON = python
 PYTHON_VERSION=3.11
 DOC_DIR=./docs
 TEST_DIR=./tests
 TEST_MARKER=placeholder
 TEST_OUTPUT_DIR=tests_outputs
-PRECOMMIT_FILE_PATHS=./python_template/__init__.py
-PROFILE_FILE_PATH=./python_template/__init__.py
-DOCKER_IMAGE=python-template
+PRECOMMIT_FILE_PATHS=./bert_score_api/__init__.py
+PROFILE_FILE_PATH=./bert_score_api/__init__.py
+DOCKER_IMAGE=bert-score-api
 DOCKER_TARGET=development
 
 # TODO: add source for rye
