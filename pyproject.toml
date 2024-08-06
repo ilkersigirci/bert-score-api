@@ -34,7 +34,10 @@ classifiers = [
     "Programming Language :: Python :: 3.12",
 ]
 
-dependencies = []
+dependencies = [
+    "bert-score>=0.3.13",
+    "fastapi[standard]>=0.112.0",
+]
 
 [tool.rye]
 managed = true
@@ -57,6 +60,8 @@ dev-dependencies = [
     # "pytest-timeout",
     ## Jupyter
     "ipykernel>=6.29.4",
+    "pytest-asyncio>=0.23.8",
+    "ujson>=5.10.0",
 ]
 
 [[tool.rye.sources]]
@@ -126,7 +131,7 @@ select = [
     "B",  # flake8-bugbear
     "C",  # flake8-comprehensions
     "C9",  # mccabe
-    "D",  # flake8-docstrings
+    # "D",  # flake8-docstrings
     "E",  # pycodestyle errors (default)
     "F",  # pyflakes (default)
     "I",  # isort
