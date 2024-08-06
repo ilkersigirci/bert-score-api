@@ -1,0 +1,32 @@
+{
+  "[python]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.codeActionsOnSave": {
+      // "source.fixAll": "always",
+      "source.organizeImports.ruff": "explicit",
+    },
+    "editor.rulers": [
+      {
+        "column": 88,
+        "color": "#57565651"
+      },
+    ],
+  },
+  "python.languageServer": "Pylance",
+  // "python.analysis.autoImportCompletions": true,
+  "ruff.nativeServer": "on",
+  "autoDocstring.generateDocstringOnEnter": true,
+  "autoDocstring.docstringFormat": "google",
+  "autoDocstring.customTemplatePath": "docs/templates/google-notypes.mustache",
+  "autoDocstring.includeExtendedSummary": false,
+  "python.testing.unittestEnabled": false,
+  "python.testing.pytestEnabled": true,
+  // "python.testing.pytestArgs": [],
+  "notebook.formatOnSave.enabled": true,
+  "notebook.codeActionsOnSave": {
+    // "source.fixAll.ruff": "always",
+    "source.organizeImports.ruff": "explicit",
+  },
+  "evenBetterToml.formatter.reorderKeys": true,
+}
