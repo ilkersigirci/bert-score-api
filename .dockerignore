@@ -18,5 +18,10 @@ htmlcov/
 .venv
 venv
 
+.pytest_cache
+.ruff_cache
+.vscode
+deployment
 docs
+notebooks
 tests

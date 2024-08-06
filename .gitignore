@@ -271,4 +271,4 @@ public
 # Scalene related
 profile.*
 
-huggingface_home
+deployment/huggingface_home

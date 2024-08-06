@@ -54,6 +54,10 @@ RUN --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
 
 COPY . .
 
+# TODO: Find out the way to set host to 0.0.0.0 using settings.py
+# NOTE: --reload gives OS file watch warning
+CMD ["rye", "run", "uvicorn", "bert_score_api.app:create_app", "--host", "0.0.0.0", "--port", "8888"]
+
 #
 # Stage: build
 #
@@ -112,3 +116,5 @@ RUN chown -R appuser:appuser /app
 
 # Switch to the non-privileged user to run the application.
 USER appuser
+
+CMD ["rye", "run", "uvicorn", "bert_score_api.app:create_app", "--host", "0.0.0.0", "--port", "8888"]

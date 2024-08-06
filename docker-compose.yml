@@ -1,19 +1,66 @@
-version: "3.9"
+name: bert-score-api
+
+networks:
+  bert-score-api-net:
+    name: bert-score-api-net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.70.0/24
+
+x-deploy: &gpu-all-deploy
+  deploy:
+    resources:
+      reservations:
+        devices:
+          - driver: nvidia
+            count: all
+            capabilities: [gpu]
 
 services:
   bert-score-api-dev:
     image: bert-score-api-dev:latest
+    container_name: bert-score-api-dev
+    restart: "no"
+    <<: *gpu-all-deploy
     build:
       context: .
       dockerfile: docker/Dockerfile
       target: development
-    # ports:
-    #   - 8080:8080
+    networks:
+      - bert-score-api-net
+    ports:
+      - 8888:8888
+    volumes:
+      - $LIBRARY_BASE_PATH/src:/app/src:ro
+      - $LIBRARY_BASE_PATH/deployment/huggingface_home:/app/.cache/huggingface
+    environment:
+      - LIBRARY_BASE_PATH=/app
+      - HF_HOME=/app/.cache/huggingface
+    healthcheck:
+      test: "curl -f http://bert-score-api-dev:8888/health"
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
   bert-score-api-prod:
     image: bert-score-api-prod:latest
+    container_name: bert-score-api-prod
+    restart: "no"
+    <<: *gpu-all-deploy
     build:
       context: .
       dockerfile: docker/Dockerfile
       target: production
-    # ports:
-    #   - 8080:8080
+      args:
+        - UID=$UID
+        - GID=$GID
+    networks:
+      - bert-score-api-net
+    ports:
+      - 8888:8888
+    healthcheck:
+      test: "curl -f http://bert-score-api-prod:8888/health"
+      interval: 10s
+      timeout: 5s
+      retries: 3
