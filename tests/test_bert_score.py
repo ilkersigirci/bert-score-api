@@ -14,4 +14,4 @@ async def test_bert_score(async_client: AsyncClient):
 
     assert response.status_code == 200
 
-    assert response.json()["precision"] > 0.6
+    assert response.json()["precision"] > [0.6]
