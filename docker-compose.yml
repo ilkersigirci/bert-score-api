@@ -43,7 +43,7 @@ services:
       timeout: 5s
       retries: 3
 
-  bert-score-api-prod:
+  bert-score-api-prod-local:
     image: bert-score-api-prod:latest
     container_name: bert-score-api-prod
     restart: "no"
@@ -63,6 +63,25 @@ services:
       - $LIBRARY_BASE_PATH/deployment/huggingface_home:/app/.cache/huggingface
     environment:
       # - LIBRARY_BASE_PATH=/app
+      - HF_HOME=/app/.cache/huggingface
+    healthcheck:
+      test: "curl -f http://bert-score-api-prod:8888/health"
+      interval: 10s
+      timeout: 5s
+      retries: 3
+
+  bert-score-api-prod:
+    image: ghcr.io/ilkersigirci/bert-score-api:latest
+    container_name: bert-score-api-prod
+    restart: "no"
+    <<: *gpu-all-deploy
+    networks:
+      - bert-score-api-net
+    ports:
+      - 8888:8888
+    volumes:
+      - $LIBRARY_BASE_PATH/deployment/huggingface_home:/app/.cache/huggingface
+    environment:
       - HF_HOME=/app/.cache/huggingface
     healthcheck:
       test: "curl -f http://bert-score-api-prod:8888/health"
