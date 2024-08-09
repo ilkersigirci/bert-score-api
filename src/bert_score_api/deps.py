@@ -2,7 +2,7 @@ from bert_score import BERTScorer
 
 
 def get_bert_scorer(
-    language: str = "tr", rescale_with_baseline: bool = False
+    language: str = "tr", rescale_with_baseline: bool = True
 ) -> BERTScorer:
     model_map = {
         "tr": "dbmdz/bert-base-turkish-cased",

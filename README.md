@@ -112,7 +112,7 @@ make -s profile PROFILE_FILE_PATH=<PATH_TO_FILE>
 
 ```bash
 
-curl -X POST "http://127.0.0.1:8888/bert-score/" \
+curl -X POST "http://127.0.0.1:8888/score_calculation/all" \
 -H "Content-Type: application/json" \
 -d '{
     "candidate": ["The quick brown fox jumps over the lazy dog"],
