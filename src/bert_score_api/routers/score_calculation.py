@@ -1,3 +1,4 @@
+import logging
 from typing import Annotated
 
 from fastapi import APIRouter, Depends, HTTPException
@@ -5,6 +6,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from bert_score_api.deps import get_bert_scorer
 from bert_score_api.schemes import TextPair
 
+logger = logging.getLogger(__name__)
 router = APIRouter(prefix="/score_calculation", tags=["calculate"])
 
 
@@ -24,10 +26,13 @@ async def calculate_bert_score(
             text_pair.reference,
             verbose=True,
         )
+
+        logger.debug(f"Precision type: {type(P)}")
+
         return {
-            "precision": P.mean().item(),
-            "recall": R.mean().item(),
-            "f1": F1.mean().item(),
+            "precision": P.tolist(),
+            "recall": R.tolist(),
+            "f1": F1.tolist(),
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e)) from e
