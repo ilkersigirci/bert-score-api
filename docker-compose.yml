@@ -59,6 +59,11 @@ services:
       - bert-score-api-net
     ports:
       - 8888:8888
+    volumes:
+      - $LIBRARY_BASE_PATH/deployment/huggingface_home:/app/.cache/huggingface
+    environment:
+      # - LIBRARY_BASE_PATH=/app
+      - HF_HOME=/app/.cache/huggingface
     healthcheck:
       test: "curl -f http://bert-score-api-prod:8888/health"
       interval: 10s

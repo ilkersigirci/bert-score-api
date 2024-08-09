@@ -63,12 +63,16 @@ CMD ["rye", "run", "uvicorn", "bert_score_api.app:create_app", "--host", "0.0.0.
 #
 FROM staging AS build
 
+ENV \
+    UV_CACHE_DIR=/opt/rye/.cache/uv
+
 RUN --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
     --mount=type=bind,source=requirements.lock,target=requirements.lock \
     --mount=type=bind,source=requirements-dev.lock,target=requirements-dev.lock \
     --mount=type=bind,source=.python-version,target=.python-version \
     --mount=type=bind,source=README.md,target=README.md \
     --mount=type=bind,source=src,target=src \
+    --mount=type=cache,target=/opt/rye/.cache/uv \
     rye build --wheel --clean
 
 #
@@ -77,8 +81,8 @@ RUN --mount=type=bind,source=pyproject.toml,target=pyproject.toml \
 ARG PYTHON_VERSION=3.11
 FROM python:${PYTHON_VERSION}-slim-bookworm AS production
 
-ARG UID=1001
-ARG GID=1001
+ARG UID=1000
+ARG GID=1000
 
 ENV \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -117,4 +121,4 @@ RUN chown -R appuser:appuser /app
 # Switch to the non-privileged user to run the application.
 USER appuser
 
-CMD ["rye", "run", "uvicorn", "bert_score_api.app:create_app", "--host", "0.0.0.0", "--port", "8888"]
+CMD ["uvicorn", "bert_score_api.app:create_app", "--host", "0.0.0.0", "--port", "8888"]
