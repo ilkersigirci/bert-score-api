@@ -120,3 +120,5 @@ curl -X POST "http://127.0.0.1:8888/bert-score/" \
 }'
 
 ```
+
+- You can find example `Client` implementation [here](https://github.com/ilkersigirci/bert-score-api/blob/main/src/bert_score_api/client.py)
