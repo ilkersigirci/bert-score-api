@@ -74,6 +74,7 @@ placeholder = "bert_score_api.scripts.placeholder:placeholder_script"
 
 [tool.pytest.ini_options]
 minversion = "7.0.0"
+asyncio_mode = "auto"
 addopts = [
     "--import-mode=importlib",
     "--color=yes",
