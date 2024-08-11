@@ -38,6 +38,7 @@ dependencies = [
     "bert-score>=0.3.13",
     "fastapi[standard]>=0.112.0",
     "orjson>=3.10.6",
+    "huggingface-hub[hf_transfer]>=0.24.5",
 ]
 
 [tool.rye]

@@ -84,6 +84,8 @@ griffe==0.44.0
 h11==0.14.0
     # via httpcore
     # via uvicorn
+hf-transfer==0.1.8
+    # via huggingface-hub
 httpcore==1.0.5
     # via httpx
 httptools==0.6.1
@@ -91,6 +93,7 @@ httptools==0.6.1
 httpx==0.27.0
     # via fastapi
 huggingface-hub==0.24.5
+    # via bert-score-api
     # via tokenizers
     # via transformers
 identify==2.5.36

@@ -35,8 +35,10 @@ services:
       - $LIBRARY_BASE_PATH/src:/app/src:ro
       - $LIBRARY_BASE_PATH/deployment/huggingface_home:/app/.cache/huggingface
     environment:
-      - LIBRARY_BASE_PATH=/app
       - HF_HOME=/app/.cache/huggingface
+      - HF_HUB_ENABLE_HF_TRANSFER=1
+      - LIBRARY_BASE_PATH=/app
+      - LANGUAGE=$LANGUAGE
     healthcheck:
       test: "curl -f http://bert-score-api-dev:8888/health"
       interval: 10s
@@ -64,6 +66,8 @@ services:
     environment:
       # - LIBRARY_BASE_PATH=/app
       - HF_HOME=/app/.cache/huggingface
+      - HF_HUB_ENABLE_HF_TRANSFER=1
+      - LANGUAGE=$LANGUAGE
     healthcheck:
       test: "curl -f http://bert-score-api-prod:8888/health"
       interval: 10s
@@ -83,6 +87,8 @@ services:
       - $LIBRARY_BASE_PATH/deployment/huggingface_home:/app/.cache/huggingface
     environment:
       - HF_HOME=/app/.cache/huggingface
+      - HF_HUB_ENABLE_HF_TRANSFER=1
+      - LANGUAGE=$LANGUAGE
     healthcheck:
       test: "curl -f http://bert-score-api-prod:8888/health"
       interval: 10s
