@@ -24,8 +24,7 @@ def anyio_backend():
 @pytest_asyncio.fixture()
 async def async_client() -> AsyncGenerator[AsyncClient, Any]:
 
-    #FIXME: This doesn't take env vars into account
-    #       Find a way to load env vars asynchronusly
+    #FIXME: This doesn't take some env vars into account. Specifically, HF_HOME
 
     app = create_app()
 

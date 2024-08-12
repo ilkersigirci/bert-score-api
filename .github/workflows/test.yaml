@@ -9,6 +9,7 @@ on:
       - main
 
 jobs:
+  # NOTE: python -m pytest -n auto doesn't work and not correctly set environment variables
   test_matrix:
     strategy:
       matrix:
@@ -33,6 +34,6 @@ jobs:
           rye sync --no-lock
       - name: Test the Project
         run: |
-          python -m pytest -n auto
+          python -m pytest
       # - name: Publish code coverage
       #   uses: codecov/codecov-action@v3
