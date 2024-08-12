@@ -7,7 +7,7 @@ from bert_score_api.utils import check_env_vars
 
 class BERTScoreClient:
     def __init__(self):
-        check_env_vars(["BERT_SCORE_API_HOST"], ["BERT_SCORE_API_PORT"])
+        check_env_vars(["BERT_SCORE_API_HOST", "BERT_SCORE_API_PORT"])
 
         BERT_SCORE_API_HOST = os.environ["BERT_SCORE_API_HOST"]
         BERT_SCORE_API_PORT = os.environ["BERT_SCORE_API_PORT"]
