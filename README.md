@@ -10,9 +10,7 @@
 - It uses [rye](https://github.com/astral-sh/rye) for python dependency operations and virtual environment management.
 - It uses `src` layout, which is the recommended layout for python projects to avoid common [pitfalls](https://blog.ionelmc.ro/2014/05/25/python-packaging/#the-structure).
 
-## Install
-
-### Default installation
+## Development Installation
 
 - Install rye - System wide
 
@@ -25,88 +23,6 @@ make -s install-rye
 ```bash
 make -s install
 ```
-
-- After running above command, the project installed in editable mode with all development and test dependencies installed.
-- Moreover, a dummy `entry point` called `placeholder` will be available as a cli command.
-
-### Docker
-
-```bash
-# Development build (800 MB)
-docker build --tag bert-score-api --file docker/Dockerfile --target development .
-
-# Production build (145 MB)
-docker build --tag bert-score-api --file docker/Dockerfile --target production .
-```
-
-- To run command inside the container:
-
-```bash
-docker run -it bert-score-api:latest bash
-
-# Temporary container
-docker run --rm -it bert-score-api:latest bash
-```
-
-## IDE Setings
-
-### Pycharm
-
-- Line-length: `Editor -> Code Style -> Hard wrap at 88`
-
-#### Inspections
-
-Settings -> Editor -> Inspections -> Python
-
-Enable all except:
-
-- Accessing a protected member of a class or a module
-- Assignment can be replaced with augmented assignments
-- Classic style class usage
-- Incorrect BDD Behave-specific definitions
-- No encoding specified for file
-- The function argument is equal to the default parameter
-- Type checker compatible with Pydantic
-- For "PEP 8 coding style violation":
-  Ignore = E266, E501
-- For "PEP 8 naming convetion violation":
-  Ignore = N803
-
-#### Plugins
-
-- Ruff
-- Pydantic
-
-### Vscode
-
-- All recommended settings and extensions can be found in `.vscode` directory.
-
-## Useful Makefile commands
-
-```bash
-# All available commands
-makefile
-makefile help
-
-# Run all tests
-make -s test
-
-# Run specific tests
-make -s test-one TEST_MARKER=<TEST_MARKER>
-
-# Remove unnecessary files such as build,test, cache
-make -s clean
-
-# Run all pre-commit hooks
-make -s pre-commit
-
-# Lint the project
-make -s lint
-
-# Profile a file
-make -s profile PROFILE_FILE_PATH=<PATH_TO_FILE>
-```
-
 
 ## Test the API
 
@@ -121,4 +37,61 @@ curl -X POST "http://127.0.0.1:8888/score_calculation/all" \
 
 ```
 
-- You can find example `Client` implementation [here](https://github.com/ilkersigirci/bert-score-api/blob/main/src/bert_score_api/client.py)
+- You can also find example `Client` implementation [here](https://github.com/ilkersigirci/bert-score-api/blob/main/src/bert_score_api/client.py)
+
+
+## Production Usage with Docker
+
+- One can use below `docker-compose` file.
+- `docker compose pull bert-score-api` to pull the image.
+- `docker compose up bert-score-api` to run the service.
+- To run command inside the container:
+
+```bash
+docker run -it ghcr.io/ilkersigirci/bert-score-api:latest bash
+
+# Temporary container
+docker run --rm -it ghcr.io/ilkersigirci/bert-score-api:latest bash
+```
+
+```yaml
+networks:
+  bert-score-api-net:
+    name: bert-score-api-net
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 192.168.70.0/24
+
+x-deploy: &gpu-all-deploy
+  deploy:
+    resources:
+      reservations:
+        devices:
+          - driver: nvidia
+            count: all
+            capabilities: [gpu]
+
+services:
+  bert-score-api:
+    image: ghcr.io/ilkersigirci/bert-score-api:latest
+    container_name: bert-score-api
+    restart: "no"
+    <<: *gpu-all-deploy
+    networks:
+      - bert-score-api-net
+    ports:
+      - 8888:8888
+    volumes:
+      - YOUR_HF_HOME:/app/.cache/huggingface
+    environment:
+      - HF_HOME=/app/.cache/huggingface
+      - HF_HUB_ENABLE_HF_TRANSFER=1
+      - LANGUAGE=$LANGUAGE
+      - RESCALE_WITH_BASELINE=$RESCALE_WITH_BASELINE
+    healthcheck:
+      test: "curl -f http://bert-score-api:8888/health"
+      interval: 10s
+      timeout: 5s
+      retries: 3
+```

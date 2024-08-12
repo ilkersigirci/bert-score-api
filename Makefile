@@ -190,7 +190,7 @@ profile-builtin: ## Profile the file with cProfile and shows the report in the t
 	${PYTHON} -m cProfile -s tottime ${PROFILE_FILE_PATH}
 
 docker-build: ## Build docker image
-	docker build --tag ${DOCKER_IMAGE} --file docker/Dockerfile --target ${DOCKER_TARGET} .
+	docker build --tag ${DOCKER_IMAGE} --file ./Dockerfile --target ${DOCKER_TARGET} .
 
 backend-server: ## Run the backend server
 	# uvicorn bert_score_api.main:app --host 0.0.0.0 --port 8888
